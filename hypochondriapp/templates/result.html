@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your Dramatic Diagnosis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <a class="back" href="{{ url_for('index') }}">← Try again</a>
+
+    <section class="card">
+      <h1>Outcome: {{ 'DEAD → ' ~ result.afterlife|upper if result.is_dead else 'ALIVE' }}</h1>
+      <h2>Worst Diagnosis: {{ result.worst_disease_label }}</h2>
+
+      <div class="badges">
+        <span class="badge">Symptom severity: {{ result.severity_score }}/100</span>
+        <span class="badge">Personality severity: {{ result.personality_score }}/100</span>
+      </div>
+
+      {% if result.llm_text %}
+        <article class="llm">
+          <pre>{{ result.llm_text }}</pre>
+        </article>
+      {% else %}
+        <article class="llm">
+          <p class="muted">LLM flair unavailable. Falling back to handcrafted doom.</p>
+          <p>
+            Brace yourself: {{ result.worst_disease_label }} has entered the chat.
+            Based on your symptom severity ({{ result.severity_score }}) and a personality reading that
+            suggests you might scold elevators ({{ result.personality_score }}), the universe has rendered
+            its verdict: {{ 'you perished in gloriously melodramatic fashion and now reside in ' ~ result.afterlife if result.is_dead else 'you live to doomscroll another day' }}.
+          </p>
+          <p class="muted">This is satire, not medical advice.</p>
+        </article>
+      {% endif %}
+    </section>
+
+    <footer class="muted">
+      <p>This is satire, not medical advice.</p>
+    </footer>
+  </main>
+</body>
+</html>
