@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hypochondriapp</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="container">
+    <h1>Hypochondriapp</h1>
+    <p class="tagline">Tell us your symptoms and reveal your personality. We’ll do the rest (i.e., the worst).</p>
+
+    <form action="{{ url_for('diagnose') }}" method="post" class="card">
+      <label for="symptoms">Symptoms (free text)</label>
+      <textarea id="symptoms" name="symptoms" rows="5" placeholder="e.g., pounding headache, chest tightness, mild fever"></textarea>
+
+      <h2>Personality Quiz</h2>
+      <p class="muted">1 = Strongly Disagree, 5 = Strongly Agree</p>
+
+      <div class="grid">
+        <div class="field">
+          <label for="q_ego">I deserve special treatment.</label>
+          <select id="q_ego" name="q_ego">
+            {% for n in range(1,6) %}<option value="{{n}}">{{n}}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="q_empathy">I often consider others’ feelings.</label>
+          <select id="q_empathy" name="q_empathy">
+            {% for n in range(1,6) %}<option value="{{n}}">{{n}}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="q_impulsivity">I act without thinking of consequences.</label>
+          <select id="q_impulsivity" name="q_impulsivity">
+            {% for n in range(1,6) %}<option value="{{n}}">{{n}}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="q_honesty">I am honest even when it’s hard.</label>
+          <select id="q_honesty" name="q_honesty">
+            {% for n in range(1,6) %}<option value="{{n}}">{{n}}</option>{% endfor %}
+          </select>
+        </div>
+        <div class="field">
+          <label for="q_patience">I stay calm in frustrating situations.</label>
+          <select id="q_patience" name="q_patience">
+            {% for n in range(1,6) %}<option value="{{n}}">{{n}}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="btn">Diagnose Me (Dramatically)</button>
+    </form>
+
+    <footer class="muted">
+      <p>This is satire, not medical advice.</p>
+    </footer>
+  </main>
+</body>
+</html>
